@@ -24,6 +24,13 @@ class ConverterTest < Minitest::Test
       assert_equal expected, actual
     end
 
-  
+  def test_it_can_identify_a_capital_letter
+    converter = Converter.new
+    input = "H"
+    actual = converter.translate_to_braille(input)
+    expected = ["..0.", "..00", ".0.."]
+
+    assert_equal expected, actual
+  end
 
 end
