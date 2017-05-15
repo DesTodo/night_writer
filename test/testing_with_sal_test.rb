@@ -24,11 +24,6 @@ class ConverterTest < Minitest::Test
       assert_equal expected, actual
     end
 
-  def test_it_can_convert_any_letter
-    skip
-    converter = Converter.new
-    input = @braille_library.keys.sample
-  end
-
+  
 
 end

@@ -1,5 +1,5 @@
 class Converter
-# require 'pry'
+require 'pry'
 
   def braille_collection
     {"a" => ["0.", "..", ".."],
@@ -27,14 +27,15 @@ class Converter
                         "w" => [".0", "00", ".0"],
                         "x" => ["00", "..", "00"],
                         "y" => ["00", ".0", "00"],
-                        "z" => ["0.", ".0", "00"]}
+                        "z" => ["0.", ".0", "00"],
+                        }
     end
 
   def translate_to_braille(input)
     braille_collection[input]
   end
 
-# binding.pry
+binding.pry
 
 
 end
