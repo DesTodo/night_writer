@@ -9,9 +9,9 @@ class ConverterTest < Minitest::Test
     converter = Converter.new
     input = "a"
     actual = converter.translate_to_braille(input)
-    expected = ["o.", "..", ".."]
-    assert_equal expected, actual
+    expected = ["0.", "..", ".."]
 
+    assert_equal expected, actual
   end
 
 
@@ -19,10 +19,16 @@ class ConverterTest < Minitest::Test
       converter = Converter.new
       input = "b"
       actual = converter.translate_to_braille(input)
-      expected = ["o.", "o.", ".."]
-      assert_equal expected, actual
+      expected = ["0.", "0.", ".."]
 
+      assert_equal expected, actual
     end
+
+  def test_it_can_convert_any_letter
+    skip
+    converter = Converter.new
+    input = @braille_library.keys.sample
+  end
 
 
 end
