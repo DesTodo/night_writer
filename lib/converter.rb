@@ -58,8 +58,15 @@ class Converter
     end
 
   def translate_to_braille(input)
-    braille_collection[input]
+    letters = input.split(//)
+    braille_characters = []
+    letters.each do |letter|
+      braille_characters << braille_collection[letter]
+    end
+    braille_characters
   end
+
+
 
 
 
