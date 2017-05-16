@@ -113,4 +113,12 @@ class ConverterTest < Minitest::Test
    assert_equal expected, actual
   end
 
+  def test_ouput_to_three_lines
+    converter = Converter.new
+    input = "X"
+    expected =  "..00\n" "....\n" ".000"
+    translator = converter.translate_to_braille(input)
+    actual = converter.output_to_braille(translator)
+    assert_equal expected, actual
+  end
 end

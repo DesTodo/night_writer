@@ -1,5 +1,5 @@
 class Converter
-
+require 'pry'
 
   def braille_collection
     {"a" => ["0.", "..", ".."],
@@ -67,9 +67,9 @@ class Converter
     braille_characters
   end
 
-
-
-
-
+  def output_to_braille(translation)
+    test = translation[0].join("\n")
+    "#{test}"
+  end
 
 end
