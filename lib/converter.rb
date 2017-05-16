@@ -2,7 +2,7 @@ class Converter
 require 'pry'
 
   def braille_collection
-    {"a" => ["0.", "..", ".."],
+                       {"a" => ["0.", "..", ".."],
                         "b" => ["0.", "0.", ".."],
                         "c" => ["00", "..", ".."],
                         "d" => ["00", ".0", ".."],
@@ -68,8 +68,13 @@ require 'pry'
   end
 
   def output_to_braille(translation)
-    test = translation[0].join("\n")
-    "#{test}"
+    # test = translation[0].join("\n")
+    # "#{test}"
+    divide_by_line = translation.transpose
+    line_one = divide_by_line[0].join
+    line_two = divide_by_line[1].join
+    line_three = divide_by_line[2].join
+    "#{line_one}\n""#{line_two}\n""#{line_three}"
   end
 
 end

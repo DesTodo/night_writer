@@ -20,7 +20,7 @@ class FileWriterTest < Minitest::Test
   end
 
   def test_translation_output_letter_to_text_file
-
+    skip
     file_writer = FileWriter.new
     converter = Converter.new
     input = "H"
@@ -33,7 +33,17 @@ class FileWriterTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_translation_output_word_to_text_file
+    file_writer = FileWriter.new
+    converter = Converter.new
+    input = "Hi"
+    translation = converter.translate_to_braille(input)
+    output = converter.output_to_braille(translation)
+    actual = file_writer.write(output)
+    # filename = "braille.txt" (entered on the command line)
+    expected = "Created braille.txt containg 18 characters"
 
-
+    assert_equal expected, actual
+  end
 
 end

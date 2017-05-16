@@ -2,7 +2,7 @@ require 'minitest'
 require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/converter'
-
+require 'pry'
 class ConverterTest < Minitest::Test
 
   def test_it_can_convert_simple_letter_to_braille
@@ -113,7 +113,7 @@ class ConverterTest < Minitest::Test
    assert_equal expected, actual
   end
 
-  def test_ouput_to_three_lines
+  def test_ouput_one_letter_to_three_lines
     converter = Converter.new
     input = "X"
     expected =  "..00\n" "....\n" ".000"
@@ -121,4 +121,15 @@ class ConverterTest < Minitest::Test
     actual = converter.output_to_braille(translator)
     assert_equal expected, actual
   end
+
+  def test_output_to_three_lines_for_multiple_letters
+    converter = Converter.new
+    input = "Hi"
+    expected = "..0..0\n" "..0000\n" ".0...."
+    translator = converter.translate_to_braille(input)
+    actual = converter.output_to_braille(translator)
+binding.pry
+    assert_equal expected, actual
+  end
+
 end
