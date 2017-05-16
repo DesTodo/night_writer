@@ -68,8 +68,6 @@ require 'pry'
   end
 
   def output_to_braille(translation)
-    # test = translation[0].join("\n")
-    # "#{test}"
     divide_by_line = translation.transpose
     line_one = divide_by_line[0].join
     line_two = divide_by_line[1].join

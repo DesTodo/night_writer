@@ -125,7 +125,7 @@ class ConverterTest < Minitest::Test
   def test_output_to_three_lines_for_multiple_letters
     converter = Converter.new
     input = "Hi"
-    expected = "..0..0\n" "..0000\n" ".0...."
+    expected = "..0..0\n" "..000.\n" ".0...."
     translator = converter.translate_to_braille(input)
     actual = converter.output_to_braille(translator)
 binding.pry
