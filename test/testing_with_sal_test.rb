@@ -49,7 +49,68 @@ class ConverterTest < Minitest::Test
     expected = [["0.", "00", ".."], [".0", "0.", ".."]]
 
     assert expected, actual
+  end
 
+  def test_convert_a_different_word
+    converter = Converter.new
+    input = "hello"
+    actual = converter.translate_to_braille(input)
+    expected = [ ["0.", "00", ".."],
+                 ["0.", ".0", ".."],
+                 ["0.", "0.", "0."],
+                 ["0.", "0.", "0."],
+                 ["0.", ".0", "0."] ]
+    assert_equal expected, actual
+
+  end
+
+  def test_convert_two_words
+    converter = Converter.new
+    input = "hello world"
+    actual = converter.translate_to_braille(input)
+    expected = [ ["0.", "00", ".."],
+                 ["0.", ".0", ".."],
+                 ["0.", "0.", "0."],
+                 ["0.", "0.", "0."],
+                 ["0.", ".0", "0."],
+                 ["..", "..", ".."],
+                 [".0", "00", ".0"],
+                 ["0.", ".0", "0."],
+                 ["0.", "00", "0."],
+                 ["0.", "0.", "0."],
+                 ["00", ".0", ".."] ]
+    assert_equal expected, actual
+  end
+
+  def test_convert_word_with_capital_letter
+    converter = Converter.new
+    input = "Hello"
+    actual = converter.translate_to_braille(input)
+    expected = [ ["..0.", "..00", ".0.."],
+                 ["0.", ".0", ".."],
+                 ["0.", "0.", "0."],
+                 ["0.", "0.", "0."],
+                 ["0.", ".0", "0."] ]
+    assert_equal expected, actual
+  end
+
+  def test_convert_two_words_with_capital_letters
+    converter = Converter.new
+    input = "Hello World"
+    actual = converter.translate_to_braille(input)
+    expected = [ ["..0.", "..00", ".0.."],
+                 ["0.", ".0", ".."],
+                 ["0.", "0.", "0."],
+                 ["0.", "0.", "0."],
+                 ["0.", ".0", "0."],
+                 ["..", "..", ".."],
+                 ["...0", "..00", ".0.0"],
+                 ["0.", ".0", "0."],
+                 ["0.", "00", "0."],
+                 ["0.", "0.", "0."],
+                 ["00", ".0", ".."] ]
+
+   assert_equal expected, actual
   end
 
 end
