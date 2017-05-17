@@ -6,6 +6,10 @@
 
 #3A
   # English to Braille translation
+  # * NOTE: character count when the braille file is created is the
+      English character count
+  # * NEED to double check all the letters in the collection array for accuracy
+  # * WRITE a multiple word test for the braille output
   # 1. input English words from text file
   #   A. grab each line of the file and put in array
   #     a. need to know capitals and translate the capitals to braille
@@ -19,7 +23,9 @@
   # 3. output braille to text file
       A. create method/class to print translated word to .txt file
 #     B. collect each braille character to write to file
-#
+# test_split = converter.line_one.scan(/.{1,160}/).join("\n")
+
+
 # 3B
 # Braille to English translation
 #   1. input Braille characters from Braille text file

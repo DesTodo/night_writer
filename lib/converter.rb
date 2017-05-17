@@ -1,6 +1,28 @@
 class Converter
 require 'pry'
 
+  attr_reader   :line_one,
+                :line_two,
+                :line_three,
+                :line_four,
+                :line_five,
+                :line_six,
+                :line_seven,
+                :line_eight,
+                :line_nine
+
+  def initialize
+    @line_one   = []
+    @line_two   = []
+    @line_three = []
+    @line_four  = []
+    @line_five  = []
+    @line_six   = []
+    @line_seven = []
+    @line_eight = []
+    @line_nine  = []
+  end
+
   def braille_collection
                        {"a" => ["0.", "..", ".."],
                         "b" => ["0.", "0.", ".."],
@@ -69,10 +91,37 @@ require 'pry'
 
   def output_to_braille(translation)
     divide_by_line = translation.transpose
-    line_one = divide_by_line[0].join
-    line_two = divide_by_line[1].join
-    line_three = divide_by_line[2].join
-    "#{line_one}\n""#{line_two}\n""#{line_three}"
+    @line_one = divide_by_line[0].join
+    @line_two = divide_by_line[1].join
+    @line_three = divide_by_line[2].join
+    "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
   end
+
+  def braille_output_length
+    @line_one.length
+  end
+
+  # def restrict_line_length
+  # #   if @line_one.length > 160
+  # #     @line_one = @line_one.slice!(0, 161)
+  # #     @line_five = @line_one.slice!(-1, 161)
+  # #   end
+  # #   @line_one.length
+  # # end
+  #   @line_one   = @line_one[0, 160]
+  #   @line_two   = @line_two[0, 160]
+  #   @line_three = @line_three[0, 160]
+  #   @line_four  = @line_one[161, 321]
+  #   @line_five  = @line_two[161, 321]
+  #   @line_six   = @line_three[322, 482]
+  #   @line_seven = @line_one[482, 642]
+  #   @line_eight = @line_two[482, 642]
+  #   @line_nine  = @line_three[482, 642]
+  # end
+  #
+  # def print_to_file
+  #   "#{line_one}\n#{line_two}\n#{line_three}\n#{line_four}\n#{line_five}\n#{line_six}\n#{line_seven}\n#{line_eight}\n#{line_nine}"
+  # end
+
 
 end

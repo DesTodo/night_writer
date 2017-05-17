@@ -128,7 +128,29 @@ class ConverterTest < Minitest::Test
     expected = "..0..0\n" "..000.\n" ".0...."
     translator = converter.translate_to_braille(input)
     actual = converter.output_to_braille(translator)
-binding.pry
+
+    assert_equal expected, actual
+  end
+
+  def test_braille_output_length
+    converter = Converter.new
+    input = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    expected = input.length * 2
+    translator = converter.translate_to_braille(input)
+    output = converter.output_to_braille(translator)
+    actual = converter.braille_output_length
+
+    assert_equal expected, actual
+  end
+
+  def test_restrict_each_line_to_160_characters
+    converter = Converter.new
+    input = "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    expected = 160
+    translator = converter.translate_to_braille(input)
+    actual = converter.output_to_braille(translator)
+    # actual = converter.restrict_line_length
+# binding.pry
     assert_equal expected, actual
   end
 
