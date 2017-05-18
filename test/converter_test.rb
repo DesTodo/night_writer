@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/converter'
+require './lib/file_reader'
 require 'pry'
 class ConverterTest < Minitest::Test
 
@@ -153,5 +154,15 @@ class ConverterTest < Minitest::Test
 # binding.pry
     assert_equal expected, actual
   end
+
+  def test_braille_text_to_symbol
+    converter = Converter.new
+    file_reader = FileReader.new
+    braille = file_reader.read
+    translate = converter.translate_from_braille(braille)
+
+    assert_equal "Hello World", translate
+  end
+
 
 end

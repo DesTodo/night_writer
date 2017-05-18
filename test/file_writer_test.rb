@@ -34,14 +34,16 @@ class FileWriterTest < Minitest::Test
   end
 
   def test_translation_output_word_to_text_file
+    
     file_writer = FileWriter.new
     converter = Converter.new
     input = "Hello World I need to try something new to make sure this will work so I know the code is good up to this point"
     translation = converter.translate_to_braille(input)
     output = converter.output_to_braille(translation)
+    # binding.pry
     actual = file_writer.write(output)
     # filename = "braille.txt" (entered on the command line)
-    expected = "Created braille.txt containg 18 characters"
+    expected = "Created braille.txt containing 18 characters"
 
     assert_equal expected, actual
   end

@@ -1,49 +1,32 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/pride'
+require 'minitest'
 require 'minitest/autorun'
-require './lib/braile_character'
-require './lib/braile_row'
-require './lib/night_writer'
+require 'minitest/pride'
+require './night_writer'
+require 'pry'
+class NightWriterTest < Minitest::Test
 
-class TextFileTest <Minitest::Test
+  def test_it_can_read_and_write
+    skip
+    night_writer = NightWriter.new
 
-def test_if_file_exists
-file = File.open(incoming_test), "r"]
-# get first word from incoming_test
-# incoming_test.class ExpectedClass
-end
+    reader = night_writer.file_reader.read
+    expected = reader.length
 
+    actual = night_writer.file_writer.write(reader)
 
-def test_if_print_times_three
-# input a line from file
-incoming_test[1]
-# print each onput times three
-end
-
-letter_a = {:a => [["0","."], [".", "."], [".","."]]}
-
-class BrailleCharacterTest < Minitest::Test
-
-  def test_it_exists
-    braille_a = BrailleCharacter.new([["0", "."], [".","."], [".","."]])
-    assert_equal BrailleCharacter, braile_a.class
-    #assert_match
-    braille_a.dots.include?(["0", "."]), ([["0", "."], [".","."], [".","."]])
+    assert_equal expected, actual
   end
 
-end
+  def test_english_to_braille_translation
+    night_writer = NightWriter.new
+    reader = night_writer.file_reader.read
+    expected = reader.length
 
-class BrailleRowTest < Minitest::Test
+    translate = night_writer.encode_to_braille(reader)
+    writer = night_writer.file_writer.write(translate)
+    actual = reader.length
 
-  def test_it_prints_in_three_lines_per_row_of_braille
-
-    line_one = "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.".chars
-    line_two = "...........Y....................................................................".chars
-    line_three = "..........X.....................................................................".chars
-    row_of_braille = [line_one, line_two, line_three]
-    brailleRow = BrailleRow.new(row_of_braile)
-    brailleRow.braille_characters[5].print
-    true
+    assert_equal expected, actual
   end
 
 end
