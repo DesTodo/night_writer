@@ -16,13 +16,13 @@ class NightWriter
     braille = encode_to_braille(plain)
     @writer.write(output, braille)
   end
-  
+
   def encode_to_braille(plain)
     converter = Converter.new
     translation = converter.translate_to_braille(plain)
     output = converter.output_to_braille(translation)
   end
-  
+
 #   def encode_to_braille(input)
 #     converter = Converter.new
 #     converter.one_shot(input)

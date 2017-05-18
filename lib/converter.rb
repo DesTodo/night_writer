@@ -92,7 +92,7 @@ class Converter
         line_one = divide_by_line[0].join
         line_two = divide_by_line[1].join
         line_three = divide_by_line[2].join
-        "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
+        "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}\n""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
       end
 
  def translate_from_braille(input)
