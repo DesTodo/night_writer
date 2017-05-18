@@ -1,29 +1,42 @@
 require './lib/file_reader'
 require './lib/file_writer'
 require './lib/converter'
-require 'pry'
 
 class NightWriter
-
-  attr_reader :file_reader,
-              :file_writer
-
+  attr_reader :reader,
+              :writer
 
   def initialize
-    @file_reader = FileReader.new
-    @file_writer = FileWriter.new
+    @reader = FileReader.new
+    @writer = FileWriter.new
   end
 
-  def encode_to_braille(input)
+  def encode_file_to_braille(input, output)
+    plain = reader.read(input)
+    braille = encode_to_braille(plain)
+    @writer.write(output, braille)
+  end
+  
+  def encode_to_braille(plain)
     converter = Converter.new
-    converter.one_shot(input)
+    translation = converter.translate_to_braille(plain)
+    output = converter.output_to_braille(translation)
   end
-# binding.pry
+  
+#   def encode_to_braille(input)
+#     converter = Converter.new
+#     converter.one_shot(input)
+#   end
 
+  def encode_file_from_braille(input, output)
+    plain = reader.read(input)
+    braille = encode_from_braille(plain)
+    @writer.write(output, braille)
+  end
+
+  def encode_from_braille(plain)
+    converter = Converter.new
+    converter.translate_from_braille(plain)
+  end
 
 end
-
-night_writer = NightWriter.new
-reader = night_writer.file_reader.read
-translate = night_writer.encode_to_braille(reader)
-writer = night_writer.file_writer.write(translate)
