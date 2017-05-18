@@ -27,7 +27,15 @@ class Converter
                         "x" => ["00", "..", "00"],
                         "y" => ["00", ".0", "00"],
                         "z" => ["0.", ".0", "00"],
-                        "9" => ["..", "..", ".0"],
+                        "1" => [".0..", ".0..", "00.0"],
+                        "2" => [".00.", ".00.", "00.."],
+                        "3" => [".000", ".0..", "00.."],
+                        "4" => [".000", ".0.0", "00.."],
+                        "5" => [".00.", ".0.0", "00.."],
+                        "6" => [".000", ".00.", "00.."],
+                        "7" => [".000", ".000", "00.."],
+                        "8" => [".00.", ".000", "00.."],
+                        "9" => [".0.0", ".00.", "00.."],
                         "A" => ["..0.", "....", ".0.."],
                         "B" => ["..0.", "..0.", ".0.."],
                         "C" => ["..00", "....", ".0.."],
@@ -92,12 +100,13 @@ class Converter
   #         output = output_to_braille(translate)
   #       end
 
-  def translate_from_braille(input)
+ def translate_from_braille(input)
     input_lines = input.split("\n")
     characters = ""
     index = 0
     upper_case = ["..","..",".0"]
-    
+    number_hash = [".0",".0","00"]
+
     while index < input_lines[0].length
 
       character_key = [
@@ -106,7 +115,7 @@ class Converter
           input_lines[2][index] + input_lines[2][index + 1]
         ]
 
-        if character_key == upper_case
+        if character_key == upper_case # || hash
 
           character_key = [
             character_key[0] + input_lines[0][index + 2] + input_lines[0][index + 3],
@@ -115,6 +124,19 @@ class Converter
           ]
           english_character = braille_to_english[character_key]
           characters += english_character
+
+          index += 4
+
+        elsif character_key == number_hash
+
+          character_key = [
+            character_key[0] + input_lines[0][index + 2] + input_lines[0][index + 3],
+            character_key[1] + input_lines[1][index + 2] + input_lines[1][index + 3],
+            character_key[2] + input_lines[2][index + 2] + input_lines[2][index + 3]
+          ]
+          english_character = braille_to_english[character_key]
+          characters += english_character
+
           index += 4
 
         else
