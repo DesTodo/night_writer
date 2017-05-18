@@ -95,11 +95,6 @@ class Converter
         "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
       end
 
-  #       def one_shot(input)
-  #         translate = translate_to_braille(input)
-  #         output = output_to_braille(translate)
-  #       end
-
  def translate_from_braille(input)
     input_lines = input.split("\n")
     characters = ""
@@ -115,7 +110,7 @@ class Converter
           input_lines[2][index] + input_lines[2][index + 1]
         ]
 
-        if character_key == upper_case # || hash
+        if character_key == upper_case
 
           character_key = [
             character_key[0] + input_lines[0][index + 2] + input_lines[0][index + 3],
