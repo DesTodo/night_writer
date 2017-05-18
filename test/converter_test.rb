@@ -174,5 +174,16 @@ class ConverterTest < Minitest::Test
     assert_equal "Hello World", translate
   end
 
+  def test_translate_from_braille
+
+    converter = Converter.new
+    braille = "..0...0...0...0.\n...0...0...0...0\n.000.000.000.000"
+    english_z = converter.translate_from_braille(braille)
+
+    assert_equal "ZZZZ", english_z
+
+  end
+
+end
 
 end
