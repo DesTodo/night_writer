@@ -1,7 +1,6 @@
 class Converter
-require 'pry'
 
-  def braille_collection
+  def english_to_braille
                        {"a" => ["0.", "..", ".."],
                         "b" => ["0.", "0.", ".."],
                         "c" => ["00", "..", ".."],
@@ -28,6 +27,7 @@ require 'pry'
                         "x" => ["00", "..", "00"],
                         "y" => ["00", ".0", "00"],
                         "z" => ["0.", ".0", "00"],
+                        "9" => ["..", "..", ".0"],
                         "A" => ["..0.", "....", ".0.."],
                         "B" => ["..0.", "..0.", ".0.."],
                         "C" => ["..00", "....", ".0.."],
@@ -54,61 +54,79 @@ require 'pry'
                         "X" => ["..00", "....", ".000"],
                         "Y" => ["..00", "...0", ".000"],
                         "Z" => ["..0.", "...0", ".000"],
-                        " " => ["..", "..", ".."]
-                        }
+                        " " => ["..", "..", ".."],
+                        "." => ["..", ".0", ".0"],
+                        "," => ["..", "0.", ".."],
+                        "!" => ["..", "00", "0."],
+                        "?" => ["..", "0.", "00"],
+                        "'" => ["..", "..", "0."],
+                        "1" => ["0.", "..", ".."],
+                        "-" => ["..", "..","00"]
+                      }
     end
 
-  def braille_to_english
-    braille_collection.invert
-  end
-
-  def translate_to_braille(input)
-    letters = input.split(//)
-    braille_characters = []
-    letters.each do |letter|
-      braille_characters << braille_collection[letter]
+    def braille_to_english
+      english_to_braille.invert
     end
-    braille_characters.pop
-    braille_characters
-    # binding.pry
-  end
 
-  def output_to_braille(translation)
-    divide_by_line = translation.transpose
-    line_one = divide_by_line[0].join
-    line_two = divide_by_line[1].join
-    line_three = divide_by_line[2].join
-    "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
-  end
-
-  def one_shot(input)
-    @character_count = input.length
-    translate = translate_to_braille(input)
-    output = output_to_braille(translate)
-  end
-
-  def translate_from_braille(input)
-      input_lines = input.split("\n")
-      characters = []
-
-      index = 0
-      # this loop only works on one row of Braille
-      while index < input_lines[0].length
-        # if character_key = c
-
-          character_key = [
-            input_lines[0][index] + input_lines[0][index + 1],
-            input_lines[1][index] + input_lines[1][index + 1],
-            input_lines[2][index] + input_lines[2][index + 1]
-          ]
-        english_character = braille_to_english[character_key]
-
-        characters << english_character
-
-        index += 2
+    def translate_to_braille(input)
+        letters = input.split(//)
+        braille_characters = []
+        letters.each do |letter|
+          braille_characters << english_to_braille[letter]
+        end
+        braille_characters.pop
+        braille_characters
       end
 
-      characters
+      def output_to_braille(translation)
+        divide_by_line = translation.transpose
+        line_one = divide_by_line[0].join
+        line_two = divide_by_line[1].join
+        line_three = divide_by_line[2].join
+        "#{line_one[0, 160]}\n""#{line_two[0, 160]}\n""#{line_three[0, 160]}\n""#{line_one[161, 321]}\n""#{line_two[161, 321]}\n""#{line_three[161, 321]}""#{line_one[322, 482]}\n""#{line_two[322, 482]}\n""#{line_three[322, 482]}\n""#{line_one[323, 483]}\n""#{line_two[323, 483]}\n""#{line_three[323, 483]}"
+      end
+
+  #       def one_shot(input)
+  #         translate = translate_to_braille(input)
+  #         output = output_to_braille(translate)
+  #       end
+
+  def translate_from_braille(input)
+    input_lines = input.split("\n")
+    characters = ""
+    index = 0
+    upper_case = ["..","..",".0"]
+    
+    while index < input_lines[0].length
+
+      character_key = [
+          input_lines[0][index] + input_lines[0][index + 1],
+          input_lines[1][index] + input_lines[1][index + 1],
+          input_lines[2][index] + input_lines[2][index + 1]
+        ]
+
+        if character_key == upper_case
+
+          character_key = [
+            character_key[0] + input_lines[0][index + 2] + input_lines[0][index + 3],
+            character_key[1] + input_lines[1][index + 2] + input_lines[1][index + 3],
+            character_key[2] + input_lines[2][index + 2] + input_lines[2][index + 3]
+          ]
+          english_character = braille_to_english[character_key]
+          characters += english_character
+          index += 4
+
+        else
+
+          english_character = braille_to_english[character_key]
+          characters += english_character
+
+          index += 2
+        end
+      end
+    characters
   end
+
 
 end
