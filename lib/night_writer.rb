@@ -8,6 +8,7 @@ class NightWriter
   attr_reader :file_reader,
               :file_writer
 
+
   def initialize
     @file_reader = FileReader.new
     @file_writer = FileWriter.new
@@ -21,3 +22,8 @@ class NightWriter
 
 
 end
+
+night_writer = NightWriter.new
+reader = night_writer.file_reader.read
+translate = night_writer.encode_to_braille(reader)
+writer = night_writer.file_writer.write(translate)

@@ -18,6 +18,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_english_to_braille_translation
+    skip
     night_writer = NightWriter.new
     reader = night_writer.file_reader.read
     expected = reader.length

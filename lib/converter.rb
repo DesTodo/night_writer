@@ -1,4 +1,5 @@
 class Converter
+require 'pry'
 
   def braille_collection
                        {"a" => ["0.", "..", ".."],
@@ -69,6 +70,7 @@ class Converter
     end
     braille_characters.pop
     braille_characters
+    # binding.pry
   end
 
   def output_to_braille(translation)
@@ -80,6 +82,7 @@ class Converter
   end
 
   def one_shot(input)
+    @character_count = input.length
     translate = translate_to_braille(input)
     output = output_to_braille(translate)
   end
